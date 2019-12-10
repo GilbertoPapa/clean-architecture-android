@@ -3,13 +3,14 @@ package com.raywenderlich.android.majesticreader.common
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.raywenderlich.android.majesticreader.domain.GenericData
 import kotlinx.android.synthetic.main.car_layout.view.*
 
 abstract class GenericAdapter (private val list: MutableList<GenericData> = mutableListOf(),
-private val itemClickListener: (GenericData) -> Unit
+private val itemClickListener: (GenericData) -> Unit, private val layout: Int
 ) : RecyclerView.Adapter<GenericAdapter.ViewHolder>()  {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -17,7 +18,7 @@ private val itemClickListener: (GenericData) -> Unit
         val subTitleTextView: TextView = view.tvSubTitle
     }
 
-    fun onCreateViewHolder(parent: ViewGroup, viewType: Int,layout: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
                 LayoutInflater.from(parent.context)
                         .inflate(layout, parent, false)
